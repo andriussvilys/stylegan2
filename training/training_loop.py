@@ -241,11 +241,11 @@ def training_loop(
     Gs_update_op = Gs.setup_as_moving_average_of(G, beta=Gs_beta)
 
     # Finalize graph.
-    # with tf.device('/gpu:0'):
-    #     try:
-    #         peak_gpu_mem_op = tf.contrib.memory_stats.MaxBytesInUse()
-    #     except tf.errors.NotFoundError:
-    #         peak_gpu_mem_op = tf.constant(0)
+    with tf.device('/gpu:0'):
+        try:
+            peak_gpu_mem_op = tf.contrib.memory_stats.MaxBytesInUse()
+        except tf.errors.NotFoundError:
+            peak_gpu_mem_op = tf.constant(0)
     tflib.init_uninitialized_vars()
 
     print('Initializing logs...')

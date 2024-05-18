@@ -17,6 +17,13 @@ logging.getLogger('tensorflow').setLevel(logging.ERROR)
 # import tensorflow.contrib   # requires TensorFlow 1.x!
 # tf.contrib = tensorflow.contrib
 
+def null_fun():
+    return 0
+
+tf.contrib.memory_stats.BytesInUse = null_fun
+tf.contrib.memory_stats.MaxBytesInUse = null_fun
+
+
 from typing import Any, Iterable, List, Union
 
 TfExpression = Union[tf.Tensor, tf.Variable, tf.Operation]
